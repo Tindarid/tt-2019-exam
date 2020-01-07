@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-img {
-  width: 100%;
-}
-</style>
+<title>Make TT great again</title>
+<style id="pagestyle"></style>
 </head>
 <body>
-<!--
--->
+<h2>Билеты для подготовки к экзамену по теории типов (year-2019)</h2>
+<b>Опции:</b> <button id="togglebutton" onclick="toggleImgStyle()">Просмотр с телефона (ширина картинок = ширине экрана)</button>
 <script>
   var tickets = [
     { // 1 (TODO: combinators, lemmas?, theorem and other, change beta-редуцируемость)
@@ -119,7 +116,7 @@ img {
       var temp_spoiler = "spoiler_" + temp;
 
       var b = document.createElement("DIV");
-      b.innerHTML = "<button type=\"button\" onclick=\"toggle('" + temp_spoiler + "')\">" + tickets[i].defs[j] + "</button>";
+      b.innerHTML = "<button type=\"button\" onclick=\"toggleImgVisibility('" + temp_spoiler + "')\">" + tickets[i].defs[j] + "</button>";
       document.body.appendChild(b);
 
       var img = document.createElement("DIV");
@@ -128,11 +125,25 @@ img {
     }
   }
 
-  function toggle(name) {
+  function toggleImgVisibility(name) {
     if (document.getElementById(name).style.display=='none') {
       document.getElementById(name).style.display='';
     } else {
       document.getElementById(name).style.display='none';
+    }
+  }
+
+  function toggleImgStyle() {
+    var s = document.getElementById("pagestyle");
+    var b = document.getElementById("togglebutton");
+    var computer = "";
+    var phone = "img {width: 100%;}";
+    if (s.innerHTML === computer) {
+      s.innerHTML = phone;
+      b.innerHTML = "Просмотр с компьютера (ширина картинок не меняется)";
+    } else {
+      s.innerHTML = computer;
+      b.innerHTML = "Просмотр с телефона (ширина картинок = ширине экрана)";
     }
   }
 </script>
