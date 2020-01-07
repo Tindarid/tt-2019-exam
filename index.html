@@ -5,8 +5,17 @@
 <style id="pagestyle"></style>
 </head>
 <body>
-<h2>Билеты для подготовки к экзамену по теории типов (year-2019)</h2>
-<b>Опции:</b> <button id="togglebutton" onclick="toggleImgStyle()">Просмотр с телефона (ширина картинок = ширине экрана)</button>
+<h2>Биλеты для подготовки к экзамену (зачету) по теории типов (2019)</h2>
+<b>Ссыλки:</b>
+<b>|</b> <a href="https://github.com/shd/tt2018/raw/master/questions.pdf">Вопросы (2018)</a>
+<b>|</b> <a href="https://github.com/shd/tt2018-conspect/raw/master/conspect.pdf">Конспект (2018)</a>
+<b>|</b> <a href="https://www.dropbox.com/s/30l482kb5tm5k7s/main.pdf?dl=0">Конспект Артема</a>
+<b>|</b> <a href="https://github.com/shd/logic2011/raw/master/conspect.pdf">Конспект матλога (2011)</a>
+<b>|</b> <a href="https://github.com/shd/tt2019/raw/master/colloq.pdf">Коλλоквиум (2019)</a>
+<b>|</b> <a href="https://github.com/Tindarid/tt-2019-exam/blob/master/README.md">Как что-то исправить/добавить</a>
+<b>|</b> <a href="http://neerc.ifmo.ru/lgd.pdf">Если что-то не нашλи здесь</a>
+<b>|</b><br><br>
+<b>Опции:</b> <button id="togglebuttonstyle" onclick="toggleImgStyle()">Loading ...</button>
 <script>
   var tickets = [
     { // 1 (TODO: maybe done?)
@@ -133,17 +142,21 @@
     }
   }
 
+  var computerDescr = "Просмотр с теλефона (ширина картинок = ширине экрана)";
+  var phoneDescr = "Просмотр с компьютера (ширина картинок не меняется)";
+  document.getElementById("togglebuttonstyle").innerHTML = computerDescr;
+
   function toggleImgStyle() {
     var s = document.getElementById("pagestyle");
-    var b = document.getElementById("togglebutton");
+    var b = document.getElementById("togglebuttonstyle");
     var computer = "";
     var phone = "img {width: 100%;}";
     if (s.innerHTML === computer) {
       s.innerHTML = phone;
-      b.innerHTML = "Просмотр с компьютера (ширина картинок не меняется)";
+      b.innerHTML = window.phoneDescr;
     } else {
       s.innerHTML = computer;
-      b.innerHTML = "Просмотр с телефона (ширина картинок = ширине экрана)";
+      b.innerHTML = window.computerDescr;
     }
   }
 </script>
