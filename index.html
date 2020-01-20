@@ -38,7 +38,7 @@ button[disabled=disabled], button:disabled {
   background: #f7f7f7 linear-gradient(#f7f7f7, #f1f1f1);
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
-a, p {
+a, p, del {
   font-family: arial,sans-serif;
   font-size: 18px;
 }
@@ -120,7 +120,7 @@ h2 {
       defs:["Тип и грамматика системы F", "Правила вывода", "Изоморфизм Карри-Ховарда", "Пара и алгебраический тип"]
     },
     { // 14 (TODO: all other info)
-      name:"Экзистенциальные типы. Конструкции pack и abstype (в 2018 году был unpack).",
+      name:"Экзистенциальные типы. Конструкции pack и abstype.",
       defs:["Экзистенциальные типы", "Pack и abstype (из ТДЗ)"]
     },
     { // 15
@@ -147,9 +147,12 @@ h2 {
       name:"Язык Идрис. Типизация printf с использованием зависимых типов.",
       defs:[]
     },
-    { // 21
+    { // 21 (DONE)
       name:"Типы Fin и Vect. Операция индексации, доказуемо не выходящая за границы массива.",
-      defs:[]
+      defs:[],
+      deleted:"",
+      links:[{text:"Fin", href:"https://github.com/idris-lang/Idris-dev/blob/master/libs/base/Data/Fin.idr"  },
+             {text:"Vect", href:"https://github.com/idris-lang/Idris-dev/blob/master/libs/base/Data/Vect.idr"}],
     },
     { // 22
       name:"Σ и Π типы в языке Идрис. Примеры использования. Переформулировка типов на языке обобщённых типовых систем. Изоморфизм Карри-Ховарда и утверждения, соответствующие данным типам.",
@@ -167,7 +170,13 @@ h2 {
 
   for (i = 0; i < tickets.length; ++i) {
     var p = document.createElement("P");
-    p.innerText = (i + 1) + ". " + tickets[i].name;
+    if (tickets[i].hasOwnProperty("deleted")) {
+      var dd = document.createElement("DEL");
+      dd.innerText = (i + 1) + ". " + tickets[i].name;
+      p.appendChild(dd);
+    } else {
+      p.innerText = (i + 1) + ". " + tickets[i].name;
+    }
     document.body.appendChild(p);
     for (j = 0; j < tickets[i].defs.length; ++j) {
       var temp = (i + 1) + "_" + (j + 1);
@@ -180,6 +189,21 @@ h2 {
       var img = document.createElement("DIV");
       img.innerHTML = "<div id=\"" + temp_spoiler + "\" style=\"display:none\"><img src=\"images/" + temp + ".png\"></div>";
       document.body.appendChild(img);
+    }
+    if (tickets[i].hasOwnProperty("links")) {
+      var ss = document.createElement("A");
+      ss.innerText = "Ссылки: |  ";
+      document.body.appendChild(ss);
+      for (j = 0; j < tickets[i].links.length; ++j) {
+        var l = document.createElement("A");
+        var pa = tickets[i].links[j];
+        l.innerHTML = pa.text;
+        l.href = pa.href;
+        document.body.appendChild(l);
+        var l = document.createElement("A");
+        l.innerHTML = "  |  ";
+        document.body.appendChild(l);
+      }
     }
   }
 
